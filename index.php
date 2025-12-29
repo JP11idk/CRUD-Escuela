@@ -3,6 +3,14 @@
     <title>Lista Alumnos</title>
 </head>
 <body>
+<?php
+    include 'conexión.php';
+    $sql="SELECT * FROM alumnos";
+    $resultado=mysqli_query($conexion,$sql);
+
+?>
+
+
     <h1>Lista de Alumnos</h1>
     <a href="">Nuevo Alumno</a>
     <a href="">Editar Alumno</a>
@@ -17,15 +25,29 @@
             </tr>
         </th>
         <tbody>
+            <?php
+                while($fila=mysqli_fetch_assoc($resultado)){
+            ?>
             <tr>
-                <td>dato 1</td>
-                <td>dato 2</td>
-                <td>dato 3</td>
-                <td>dato 4</td>
-
+                <td> <?php echo $fila['id'] ?> </td>
+                <td> <?php echo $fila['nombre'] ?></td>
+                <td> <?php echo $fila['matricula'] ?></td>
+                <td>
+                    <?php 
+                    #Vinculo para Editar
+                    echo "<a href=''>Editar</a> ";
+                    #Vinculo para Eliminar
+                    echo "<a href=''>Eliminar</a> ";
+                    ?>
+                </td>
             </tr>
+            <?php
+                }
+            ?>
         </tbody>
     <table>
-     
+    <?php
+        mysqli_close($conexion);
+    ?>
 </body>
 </html>
