@@ -12,9 +12,7 @@
 
 
     <h1>Lista de Alumnos</h1>
-    <a href="">Nuevo Alumno</a>
-    <a href="">Editar Alumno</a>
-    <a href="">Eliminar Alumno</a><br><br>
+    <a href="agregar.php">Nuevo Alumno</a><br>
     <table>
         <th>
             <tr>
@@ -33,13 +31,14 @@
                 <td> <?php echo $fila['nombre'] ?></td>
                 <td> <?php echo $fila['matricula'] ?></td>
                 <td>
-                    <?php 
+                     <?php
                     #Vinculo para Editar
                     echo "<a href=''>Editar</a> ";
+                    echo " | ";
                     #Vinculo para Eliminar
                     echo "<a href=''>Eliminar</a> ";
                     ?>
-                </td>
+                </td> 
             </tr>
             <?php
                 }
