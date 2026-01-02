@@ -3,14 +3,18 @@
     <title>Lista Alumnos</title>
 </head>
 <body>
+
 <?php
-    include 'conexión.php';
+    include 'conexion.php';
     $sql="SELECT * FROM alumnos";
     $resultado=mysqli_query($conexion,$sql);
-
 ?>
-
-
+<!--Alerta de actualización exitosa -->
+<?php
+if (isset($_GET['ok']) && $_GET['ok'] == 1) {
+    echo "<script language= 'JavaScript'>  alert('Alumno actualizado correctamente'); </script>";
+}
+?>
     <h1>Lista de Alumnos</h1>
     <a href="agregar.php">Nuevo Alumno</a><br>
     <table>
@@ -31,13 +35,12 @@
                 <td> <?php echo $fila['nombre'] ?></td>
                 <td> <?php echo $fila['matricula'] ?></td>
                 <td>
-                     <?php
-                    #Vinculo para Editar
-                    echo "<a href=''>Editar</a> ";
-                    echo " | ";
-                    #Vinculo para Eliminar
-                    echo "<a href=''>Eliminar</a> ";
-                    ?>
+                    
+                    <!--Vinculo para Editar-->
+                    <?php echo "<a href='editar.php?id=".$fila['id']."'>Editar</a> "; ?>
+                    <?php echo " | "; ?>
+                    <!--Vinculo para Eliminar-->
+                    <?php echo "<a href=''>Eliminar</a> "; ?>
                 </td> 
             </tr>
             <?php
