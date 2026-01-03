@@ -5,11 +5,17 @@
 <body>
 
 <?php
-    include 'conexion.php';
+    require_once 'conexion.php';
     $sql="SELECT * FROM alumnos";
     $resultado=mysqli_query($conexion,$sql);
 ?>
-<!--Alerta de actualización exitosa -->
+<!--Mensaje de Eliminación exitosa-->
+<?php
+    if (isset($_GET['msg']) && $_GET['msg'] === 'eliminado') {
+        echo "<script language= 'JavaScript'>alert('Alumno eliminado correctamente');</script>";
+    }
+?>
+<!--Alerta de actualización exitosa-->
 <?php
 if (isset($_GET['ok']) && $_GET['ok'] == 1) {
     echo "<script language= 'JavaScript'>  alert('Alumno actualizado correctamente'); </script>";
@@ -36,11 +42,20 @@ if (isset($_GET['ok']) && $_GET['ok'] == 1) {
                 <td> <?php echo $fila['matricula'] ?></td>
                 <td>
                     
-                    <!--Vinculo para Editar-->
-                    <?php echo "<a href='editar.php?id=".$fila['id']."'>Editar</a> "; ?>
-                    <?php echo " | "; ?>
-                    <!--Vinculo para Eliminar-->
-                    <?php echo "<a href=''>Eliminar</a> "; ?>
+                    <!--Botón para Editar($_GET)-->
+                    <form action="editar.php" method="GET" style="display:inline; margin-right:6px;">
+                        <input type="hidden" name="id" value="<?= $fila['id'] ?>">
+                            <button type="submit">Editar</button>
+                    </form>
+
+                    <!--Botón para Eliminar($_POST(-->
+                    <form action="eliminar.php" method="POST" style="display:inline;">
+                        <input type="hidden" name="id" value="<?= $fila['id'] ?>">
+                            <button type="submit"
+                                onclick="return confirm('¿Seguro que quieres eliminar este alumno?');">
+                                Eliminar
+                            </button>
+                    </form>
                 </td> 
             </tr>
             <?php
