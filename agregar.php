@@ -8,7 +8,7 @@
             $nombre=$_POST['nombre'];
             $matricula=$_POST['matricula'];
 
-            include ("conexión.php");
+            require_once ("conexion.php");
             $sql= "insert into alumnos (nombre, matricula)
             values ('".$nombre."', '".$matricula."')";
             $resultado = mysqli_query($conexion, $sql);
